@@ -62,6 +62,7 @@
 				const globalData=getApp()
 				globalData.globalData.user=this.username
 				// pass the  data by vuex(store)
+				this.$store.commit('saveUser',this.username)
 				uni.switchTab({
 					url:'/pages/ViewList/index'
 				})
