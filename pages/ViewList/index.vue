@@ -4,17 +4,10 @@
 					
 					<uni-table ref="table" :loading="loading" border stripe type="selection" emptyText="暂无更多数据" @selection-change="selectionChange">
 						<uni-tr>
-							<uni-th width="150" align="center">日期</uni-th>
-							<uni-th width="150" align="center">姓名</uni-th>
-							<uni-th align="center">地址</uni-th>
-							<uni-th width="204" align="center">设置</uni-th>
+							<uni-th v-for="(item,index) of thCols" :key="index" align="center">{{item.name}}</uni-th>
 						</uni-tr>
-						<uni-tr v-for="(item, index) in tableData" :key="index">
-							<uni-td>{{ item.date }}</uni-td>
-							<uni-td>
-								<view class="name">{{ item.name }}</view>
-							</uni-td>
-							<uni-td align="center">{{ item.address }}</uni-td>
+						<uni-tr v-for="(item, index) of tableData" :key="index">
+							<uni-td v-for="(titem, tindex) in item" :key="tindex">{{ titem }}</uni-td>
 							<uni-td>
 								<view class="uni-group">
 									<button class="uni-button" size="mini" type="primary">修改</button>
@@ -23,7 +16,7 @@
 							</uni-td>
 						</uni-tr>
 					</uni-table>
-					<view class="uni-pagination-box"><uni-pagination show-icon :page-size="pageSize" :current="pageCurrent" :total="total" @change="change" /></view>
+					<!-- <view class="uni-pagination-box"><uni-pagination show-icon :page-size="pageSize" :current="pageCurrent" :total="total" @change="change" /></view> -->
 				</view>
 	</view>
 </template>
@@ -66,7 +59,9 @@
 						key:'operator',
 						name:'操作'
 					}
-				]
+				],
+				tableData:[],
+				loading:false
 			}
 		},
 		mounted(){
@@ -76,6 +71,17 @@
 			console.log('123-2',userName1)
 			const userName2=userStore.state.userName
 			console.log('123-3',userName2)
+			this.tableData=[{
+				id:'1001',
+				jobName:'第一次作业',
+				'batch-total':100,
+				status:1001,
+				'job-create-time':'2022-01-01',
+				'job-lastupdate-time':'2022-02-02',
+				'job-object':'zjl',
+				'job-reviewer':'zyj',
+				scope:99
+			}]
 		},
 		methods: {
 			
