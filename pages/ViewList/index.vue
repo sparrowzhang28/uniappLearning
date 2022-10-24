@@ -7,7 +7,7 @@
 							<uni-th v-for="(item,index) of thCols" :key="index" align="center">{{item.name}}</uni-th>
 						</uni-tr>
 						<uni-tr v-for="(item, index) of tableData" :key="index">
-							<uni-td v-for="(titem, tindex) in item" :key="tindex" align="center">{{ titem }}</uni-td>
+							<uni-td v-for="(titem, tindex) in item" :key="tindex" align="center">{{ tindex==='status'?statusList.find(i=>i.value===titem).text:titem }}</uni-td>
 							<uni-td align="center">
 								<view class="uni-group btnBox">
 									<button class="uni-button" size="mini" type="primary" @click="editItem(item)">修改</button>
@@ -89,6 +89,17 @@
 				'job-object':'zjl',
 				'job-reviewer':'zyj',
 				scope:99
+			},
+			{
+				id:'1002',
+				jobName:'第二次作业',
+				'batch-total':101,
+				status:1002,
+				'job-create-time':'2022-01-01',
+				'job-lastupdate-time':'2022-02-02',
+				'job-object':'zjl',
+				'job-reviewer':'zyj',
+				scope:99
 			}]
 		},
 		methods: {
@@ -97,6 +108,7 @@
 			},
 			delItem(item){
 				console.log('item',item)
+				this.tableData=this.tableData.filter(i=>i.id!==item.id)
 			}
 		}
 	}
