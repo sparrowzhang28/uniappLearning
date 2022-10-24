@@ -1,17 +1,17 @@
 <template>
 	<view>
 		<view class="uni-container">
-					
+					<uni-data-select :localdata="statusList" v-model="statusParams"></uni-data-select>
 					<uni-table ref="table" :loading="loading" border stripe type="selection" emptyText="暂无更多数据" @selection-change="selectionChange">
 						<uni-tr>
 							<uni-th v-for="(item,index) of thCols" :key="index" align="center">{{item.name}}</uni-th>
 						</uni-tr>
 						<uni-tr v-for="(item, index) of tableData" :key="index">
-							<uni-td v-for="(titem, tindex) in item" :key="tindex">{{ titem }}</uni-td>
-							<uni-td>
-								<view class="uni-group">
-									<button class="uni-button" size="mini" type="primary">修改</button>
-									<button class="uni-button" size="mini" type="warn">删除</button>
+							<uni-td v-for="(titem, tindex) in item" :key="tindex" align="center">{{ titem }}</uni-td>
+							<uni-td align="center">
+								<view class="uni-group btnBox">
+									<button class="uni-button" size="mini" type="primary" @click="editItem(item)">修改</button>
+									<button class="uni-button" size="mini" type="warn" @click="delItem(item)">删除</button>
 								</view>
 							</uni-td>
 						</uni-tr>
@@ -61,7 +61,15 @@
 					}
 				],
 				tableData:[],
-				loading:false
+				loading:false,
+				statusList:[{
+					value:1001,
+					text:'未完成'
+				},{
+					value:1002,
+					text:'部分完成'
+				}],
+				statusParams:1001
 			}
 		},
 		mounted(){
@@ -84,11 +92,20 @@
 			}]
 		},
 		methods: {
-			
+			editItem(item){
+				console.log('item',item)
+			},
+			delItem(item){
+				console.log('item',item)
+			}
 		}
 	}
 </script>
 
-<style>
-
+<style scoped lang="less">
+	.btnBox{
+		.uni-button{
+			margin-right: 24rpx;
+		}
+	}
 </style>
