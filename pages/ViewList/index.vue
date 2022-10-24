@@ -1,7 +1,16 @@
 <template>
 	<view>
 		<view class="uni-container">
-					<uni-data-select :localdata="statusList" v-model="statusParams"></uni-data-select>
+					<uni-row class="headerBox">
+						<uni-col :span="10">
+							<uni-data-select :localdata="statusList" v-model="statusParams"></uni-data-select>
+						</uni-col>
+						<uni-col :span="6">
+							<button class="searchBtn" @click="searchTable">search</button>
+						</uni-col>
+					</uni-row>
+					
+					
 					<uni-table ref="table" :loading="loading" border stripe type="selection" emptyText="暂无更多数据" @selection-change="selectionChange">
 						<uni-tr>
 							<uni-th v-for="(item,index) of thCols" :key="index" align="center">{{item.name}}</uni-th>
@@ -79,36 +88,42 @@
 			console.log('123-2',userName1)
 			const userName2=userStore.state.userName
 			console.log('123-3',userName2)
-			this.tableData=[{
-				id:'1001',
-				jobName:'第一次作业',
-				'batch-total':100,
-				status:1001,
-				'job-create-time':'2022-01-01',
-				'job-lastupdate-time':'2022-02-02',
-				'job-object':'zjl',
-				'job-reviewer':'zyj',
-				scope:99
-			},
-			{
-				id:'1002',
-				jobName:'第二次作业',
-				'batch-total':101,
-				status:1002,
-				'job-create-time':'2022-01-01',
-				'job-lastupdate-time':'2022-02-02',
-				'job-object':'zjl',
-				'job-reviewer':'zyj',
-				scope:99
-			}]
+			this.getTable()
 		},
 		methods: {
+			getTable(){
+				this.tableData=[{
+					id:'1001',
+					jobName:'第一次作业',
+					'batch-total':100,
+					status:1001,
+					'job-create-time':'2022-01-01',
+					'job-lastupdate-time':'2022-02-02',
+					'job-object':'zjl',
+					'job-reviewer':'zyj',
+					scope:99
+				},
+				{
+					id:'1002',
+					jobName:'第二次作业',
+					'batch-total':101,
+					status:1002,
+					'job-create-time':'2022-01-01',
+					'job-lastupdate-time':'2022-02-02',
+					'job-object':'zjl',
+					'job-reviewer':'zyj',
+					scope:99
+				}]
+			},
 			editItem(item){
 				console.log('item',item)
 			},
 			delItem(item){
 				console.log('item',item)
 				this.tableData=this.tableData.filter(i=>i.id!==item.id)
+			},
+			searchTable(){
+				this.getTable()
 			}
 		}
 	}
@@ -119,5 +134,14 @@
 		.uni-button{
 			margin-right: 24rpx;
 		}
+	}
+	.searchBtn{
+		line-height: 35px;
+		font-size: 28rpx;
+		padding: 0 24rpx;
+		margin-left:12rpx;
+	}
+	.headerBox{
+		margin:8rpx !important;
 	}
 </style>
