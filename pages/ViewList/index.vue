@@ -35,8 +35,8 @@
 				:before-close="true" @close="close" @confirm="confirm">
 				<uni-row class="modelHeader">
 					<uni-col :span="16">
-						<view style="display: inline-block;margin-right: 8rpx;font-size: 12rpx;">状态:</view>
-						<uni-easyinput :value="modalStatusParams"></uni-easyinput>
+						<view style="display: inline-block;margin-right: 8rpx;font-size: 12rpx;">状态:{{count()}}</view>
+
 					</uni-col>
 					<uni-col :span="6">
 						<button class="searchBtn" @click="searchModalTable">查询</button>
@@ -49,7 +49,8 @@
 					<uni-table ref="modelTable" :loading="loading" border stripe emptyText="暂无更多数据">
 						<uni-tr>
 							<uni-th v-for="(item,index) of modelCols" :key="index" align="center" width="10">
-								{{item.name}}</uni-th>
+								{{item.name}}
+							</uni-th>
 						</uni-tr>
 						<uni-tr v-for="(item, index) of modelTableData" :key="index">
 							<uni-td v-for="(titem, tindex) in item" :key="tindex" align="center">
@@ -110,7 +111,6 @@
 				}],
 				statusParams: 1001,
 				editDialogItem: null,
-				modalStatusParams: '',
 				modelTableData: [],
 				modelCols: [{
 					key: 'order',
@@ -215,6 +215,39 @@
 			},
 			exportModalTable() {
 				console.log('exportModalTable')
+			},
+			applyOperator(op) {
+				if (op.includes('+')) {
+					const tmp = op.split('+')
+					return Number(tmp[0]) + Number(tmp[1])
+				}
+				if (op.includes('-')) {
+					const tmp = op.split('-')
+					return tmp[0] - tmp[1]
+				}
+				if (op.includes('*')) {
+					const tmp = op.split('*')
+					return tmp[0] * tmp[1]
+				}
+				if (op.includes('/')) {
+					const tmp = op.split('/')
+					return tmp[0] / tmp[1]
+				}
+			},
+			count() {
+				console.log('123', this.modelTableData)
+				let count = 0;
+				this.modelTableData.forEach(i => {
+					const {
+						answer,
+						content
+					} = i
+					const tmp = content.replaceAll('"')
+					if (Number(answer) === this.applyOperator(tmp)) {
+						count++
+					}
+				})
+				return Math.floor(count / this.modelTableData.length * 100)
 			}
 		}
 	}
