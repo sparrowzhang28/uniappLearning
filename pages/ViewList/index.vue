@@ -168,7 +168,7 @@
 				}, {
 					order: 2,
 					content: '2+2',
-					answer: '3'
+					answer: '4'
 				}, {
 					order: 3,
 					content: '3+3',
