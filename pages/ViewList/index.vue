@@ -36,8 +36,7 @@
 				<uni-row class="modelHeader">
 					<uni-col :span="16">
 						<view style="display: inline-block;margin-right: 8rpx;font-size: 12rpx;">状态:</view>
-						<uni-data-select :localdata="statusList" v-model="modalStatusParams"
-							style="display: inline-block;width: 200rpx;font-size: 12rpx;"></uni-data-select>
+						<uni-easyinput :value="modalStatusParams"></uni-easyinput>
 					</uni-col>
 					<uni-col :span="6">
 						<button class="searchBtn" @click="searchModalTable">查询</button>
@@ -46,7 +45,19 @@
 				<uni-row class="modelHeader">
 					<uni-col :span="24"><button class="searchBtn" @click="exportModalTable">导出结果</button></uni-col>
 				</uni-row>
-
+				<uni-row class="modelHeader tableBox">
+					<uni-table ref="modelTable" :loading="loading" border stripe emptyText="暂无更多数据">
+						<uni-tr>
+							<uni-th v-for="(item,index) of modelCols" :key="index" align="center" width="10">
+								{{item.name}}</uni-th>
+						</uni-tr>
+						<uni-tr v-for="(item, index) of modelTableData" :key="index">
+							<uni-td v-for="(titem, tindex) in item" :key="tindex" align="center">
+								{{ titem }}
+							</uni-td>
+						</uni-tr>
+					</uni-table>
+				</uni-row>
 			</uni-popup-dialog>
 		</uni-popup>
 	</view>
@@ -100,7 +111,17 @@
 				statusParams: 1001,
 				editDialogItem: null,
 				modalStatusParams: '',
-				modalTableList: []
+				modelTableData: [],
+				modelCols: [{
+					key: 'order',
+					name: '序号'
+				}, {
+					key: 'content',
+					name: '题目'
+				}, {
+					key: 'answer',
+					name: '答案'
+				}]
 			}
 		},
 		mounted() {
@@ -140,6 +161,39 @@
 				console.log('item', item)
 				this.editDialogItem = item
 				// get modalTableList by item-params
+				this.modelTableData = [{
+					order: 1,
+					content: '1+1',
+					answer: '2'
+				}, {
+					order: 2,
+					content: '2+2',
+					answer: '3'
+				}, {
+					order: 3,
+					content: '3+3',
+					answer: '6'
+				}, {
+					order: 4,
+					content: '4+4',
+					answer: '8'
+				}, {
+					order: 5,
+					content: '5+5',
+					answer: '10'
+				}, {
+					order: 6,
+					content: '6+6',
+					answer: '12'
+				}, {
+					order: 7,
+					content: '7+7',
+					answer: '14'
+				}, {
+					order: 8,
+					content: '8+8',
+					answer: '16'
+				}]
 				this.$refs.popup.open()
 			},
 			close() {
@@ -198,6 +252,17 @@
 			font-size: 20rpx;
 			padding: 0 12rpx;
 			margin-left: 8rpx;
+		}
+
+		/deep/ .uni-easyinput {
+			width: 240rpx;
+			display: inline-flex;
+		}
+
+		&.tableBox {
+			max-height: 300px;
+			overflow-y: auto;
+			overflow-x: hidden;
 		}
 	}
 
