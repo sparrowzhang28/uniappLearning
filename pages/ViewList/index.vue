@@ -3,10 +3,10 @@
 		<view class="uni-container">
 					<uni-row class="headerBox">
 						<uni-col :span="10">
-							<uni-data-select :localdata="statusList" v-model="statusParams"></uni-data-select>
+							<view style="display: inline-block;margin-right: 8rpx;">状态:</view><uni-data-select :localdata="statusList" v-model="statusParams" style="display: inline-block;width: 200rpx;"></uni-data-select>
 						</uni-col>
 						<uni-col :span="6">
-							<button class="searchBtn" @click="searchTable">search</button>
+							<button class="searchBtn" @click="searchTable">查询</button>
 						</uni-col>
 					</uni-row>
 					
