@@ -36,7 +36,6 @@
 				<uni-row class="modelHeader">
 					<uni-col :span="16">
 						<view style="display: inline-block;margin-right: 8rpx;font-size: 12rpx;">状态:{{count()}}</view>
-
 					</uni-col>
 					<uni-col :span="6">
 						<button class="searchBtn" @click="searchModalTable">查询</button>
