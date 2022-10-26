@@ -23,25 +23,7 @@
 	export default {
 		data() {
 			return {
-				jobsList: [{
-					count: '1+2',
-					answer: 3
-				}, {
-					count: '1+3',
-					answer: 4
-				}, {
-					count: '1+3',
-					answer: 4
-				}, {
-					count: '1+3',
-					answer: 4
-				}, {
-					count: '1+3',
-					answer: 4
-				}, {
-					count: '1+3',
-					answer: 4
-				}],
+				jobsList: [],
 				jobsNum: 0,
 				numRange: 0,
 				calcOperators: [{
@@ -97,7 +79,6 @@
 					}
 					str=num1+this.calcOper+num2
 					answer=this.mappingCalcOper(this.calcOper,num1,num2)
-					console.log('str',str)
 					calcNums.push({
 						count:str,
 						answer:answer
