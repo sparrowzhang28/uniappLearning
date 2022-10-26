@@ -13,6 +13,9 @@
 		<uni-row class="countBox">
 			<uni-col :span="6" v-for="(item,index) of jobsList" :key="index" class="jobItem">{{item.count}}</uni-col>
 		</uni-row>
+		<uni-popup ref="popup" type="dialog">
+			<view>作业数量和数字范围必须为有效数字</view>
+		</uni-popup>
 	</view>
 </template>
 
@@ -58,8 +61,51 @@
 			}
 		},
 		methods: {
+		mappingCalcOper(oper,a,b){
+			switch(oper){
+				case '+':
+				 return a+b;
+				 break;
+				case '-':
+				 return a-b;
+				 break;
+				case '*':
+				 return a*b;
+				 break;
+				case '/':
+				 return a/b;
+				break
+			}
+		},
 		generator(){
 			console.log(this.calcOper,this.numRange,this.jobsNum)
+			if(!this.numRange||!this.jobsNum){
+				this.$refs.popup.open()
+				return
+			}else{
+				const calcNums=[]
+				
+				for(let i=0;i<this.numRange;i++){
+					let str=''
+					let answer=0
+					const num1=Math.ceil(Math.random()*this.jobsNum)
+					const num2=Math.ceil(Math.random()*this.jobsNum)
+					if(this.calcOper==='-'){
+						if(num1<num2){
+							[num1,num2]=[num2,num1]
+						}
+					}
+					str=num1+this.calcOper+num2
+					answer=this.mappingCalcOper(this.calcOper,num1,num2)
+					console.log('str',str)
+					calcNums.push({
+						count:str,
+						answer:answer
+					})
+				}
+				console.log('123',calcNums)
+				this.jobsList=calcNums
+			}
 		}
 		}
 	}
