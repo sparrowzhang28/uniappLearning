@@ -8,10 +8,10 @@
 			</uni-col>
 			<uni-col :span="7">数字范围:&nbsp;<uni-easyinput class="rangenum" v-model="numRange" :clearable="false"></uni-easyinput>
 			</uni-col>
-			<uni-col :span="3"><button class="btn">生成</button></uni-col>
+			<uni-col :span="3"><button class="btn" @click="generator">生成</button></uni-col>
 		</uni-row>
 		<uni-row class="countBox">
-			<uni-col :span="4" v-for="(item,index) of jobsList" :key="index">{{item.count}}</uni-col>
+			<uni-col :span="6" v-for="(item,index) of jobsList" :key="index" class="jobItem">{{item.count}}</uni-col>
 		</uni-row>
 	</view>
 </template>
@@ -26,8 +26,19 @@
 				}, {
 					count: '1+3',
 					answer: 4
+				}, {
+					count: '1+3',
+					answer: 4
+				}, {
+					count: '1+3',
+					answer: 4
+				}, {
+					count: '1+3',
+					answer: 4
+				}, {
+					count: '1+3',
+					answer: 4
 				}],
-				calcOperator: '',
 				jobsNum: 0,
 				numRange: 0,
 				calcOperators: [{
@@ -47,7 +58,9 @@
 			}
 		},
 		methods: {
-
+		generator(){
+			console.log(this.calcOper,this.numRange,this.jobsNum)
+		}
 		}
 	}
 </script>
@@ -79,6 +92,21 @@
 				line-height: 1;
 				padding: 24rpx 8rpx;
 				font-size: 24rpx;
+			}
+		}
+		.countBox{
+			display: flex;
+			flex-direction: row;
+			width: 100%;
+			padding:8rpx;
+			margin-top:8rpx;
+			flex-wrap:wrap;
+			.jobItem{
+				border-right:1rpx solid gray;
+				border-bottom: 1rpx solid gray;
+				border-top:1rpx solid gray;
+				border-left:1rpx solid gray;
+				text-align: center;
 			}
 		}
 	}
