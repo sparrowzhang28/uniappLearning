@@ -65,6 +65,7 @@
 </template>
 
 <script>
+	import json2xlsx from 'json2xlsx-export';
 	import userStore from '../../store/modules/userModule.js'
 	export default {
 		data() {
@@ -215,6 +216,11 @@
 			},
 			exportModalTable() {
 				console.log('exportModalTable')
+				// let fm=wx.getFileSystemManager()
+				// fm.writeFile({
+				// 	filePath:'text.xls',
+				// 	data:this.modelTableData
+				// })
 			},
 			applyOperator(op) {
 				if (op.includes('+')) {

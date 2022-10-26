@@ -1,9 +1,14 @@
 <template>
 	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view class="text-area">
-			<text class="title">Assign</text>
-		</view>
+		<uni-row class="header">
+			<uni-col>计算条件</uni-col>
+			<uni-col>作业数量</uni-col>
+			<uni-col>数字范围</uni-col>
+			<uni-col>生成</uni-col>
+		</uni-row>
+		<uni-row class="countBox">
+			<uni-col :span="4" v-for="(item,index) of jobsList" :key="index">{{item.count}}</uni-col>
+		</uni-row>
 	</view>
 </template>
 
@@ -11,11 +16,17 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello'
+				jobsList: [{
+					count: '1+2',
+					answer: 3
+				}, {
+					count: '1+3',
+					answer: 4
+				}],
+				calcOperator: '',
+				jobsNum: 0,
+				numRange: 0
 			}
-		},
-		onLoad() {
-
 		},
 		methods: {
 
@@ -31,22 +42,5 @@
 		justify-content: center;
 	}
 
-	.logo {
-		height: 200rpx;
-		width: 200rpx;
-		margin-top: 200rpx;
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 50rpx;
-	}
-
-	.text-area {
-		display: flex;
-		justify-content: center;
-	}
-
-	.title {
-		font-size: 36rpx;
-		color: #8f8f94;
-	}
+	
 </style>
