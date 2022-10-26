@@ -4,14 +4,19 @@
 			<uni-col :span="7">计算条件:&nbsp;<uni-data-select :localdata="calcOperators" v-model="calcOper"
 					style="display: inline-block;width: 100rpx;" :clear="false"></uni-data-select>
 			</uni-col>
-			<uni-col :span="7">作业数量:&nbsp;<uni-easyinput class="rangenum" v-model="jobsNum" :clearable="false"></uni-easyinput>
+			<uni-col :span="7">作业数量:&nbsp;<uni-easyinput class="rangenum" v-model="jobsNum" :clearable="false">
+				</uni-easyinput>
 			</uni-col>
-			<uni-col :span="7">数字范围:&nbsp;<uni-easyinput class="rangenum" v-model="numRange" :clearable="false"></uni-easyinput>
+			<uni-col :span="7">数字范围:&nbsp;<uni-easyinput class="rangenum" v-model="numRange" :clearable="false">
+				</uni-easyinput>
 			</uni-col>
 			<uni-col :span="3"><button class="btn" @click="generator">生成</button></uni-col>
 		</uni-row>
 		<uni-row class="countBox">
-			<uni-col :span="6" v-for="(item,index) of jobsList" :key="index" class="jobItem">{{item.count}}</uni-col>
+			<uni-col :span="6" v-for="(item,index) of jobsList" :key="index" class="jobItem">
+				<view  @click="clickJobItem" class="answer">{{item.count}}</view>
+				<view v-if="showAnswer" class="answer">={{item.answer}}</view>
+			</uni-col>
 		</uni-row>
 		<uni-popup ref="popup" type="dialog">
 			<view>作业数量和数字范围必须为有效数字</view>
@@ -39,55 +44,57 @@
 					value: '/',
 					text: '除'
 				}],
-				calcOper: '+'
+				calcOper: '+',
+				showAnswer: false
 			}
 		},
 		methods: {
-		mappingCalcOper(oper,a,b){
-			switch(oper){
-				case '+':
-				 return a+b;
-				 break;
-				case '-':
-				 return a-b;
-				 break;
-				case '*':
-				 return a*b;
-				 break;
-				case '/':
-				 return a/b;
-				break
-			}
-		},
-		generator(){
-			console.log(this.calcOper,this.numRange,this.jobsNum)
-			if(!this.numRange||!this.jobsNum){
-				this.$refs.popup.open()
-				return
-			}else{
-				const calcNums=[]
-				
-				for(let i=0;i<this.numRange;i++){
-					let str=''
-					let answer=0
-					const num1=Math.ceil(Math.random()*this.jobsNum)
-					const num2=Math.ceil(Math.random()*this.jobsNum)
-					if(this.calcOper==='-'){
-						if(num1<num2){
-							[num1,num2]=[num2,num1]
-						}
-					}
-					str=num1+this.calcOper+num2
-					answer=this.mappingCalcOper(this.calcOper,num1,num2)
-					calcNums.push({
-						count:str,
-						answer:answer
-					})
+			mappingCalcOper(oper, a, b) {
+				switch (oper) {
+					case '+':
+				 	return a + b;
+						break;
+					case '-':
+						return a - b;
+						break;
+					case '*':
+						return a * b;
+						break;
+					case '/':
+						return a / b;
+						break
 				}
-				console.log('123',calcNums)
-				this.jobsList=calcNums
+			},
+			generator() {
+				console.log(this.calcOper, this.numRange, this.jobsNum)
+				if (!this.numRange || !this.jobsNum) {
+					this.$refs.popup.open()
+					return
+				} else {
+					const calcNums = []
+					for (let i = 0; i < this.jobsNum; i++) {
+						let str = ''
+						let answer = 0
+						const num1 = Math.ceil(Math.random() * this.numRange)
+						const num2 = Math.ceil(Math.random() * this.numRange)
+						if (this.calcOper === '-') {
+							if (num1 < num2) {
+								[num1, num2] = [num2, num1]
+							}
+						}
+						str = num1 + this.calcOper + num2
+						answer = this.mappingCalcOper(this.calcOper, num1, num2)
+						calcNums.push({
+							count: str,
+							answer: answer
+						})
+					}
+					this.jobsList = calcNums
+				}
+			},
+			clickJobItem() {
+				this.showAnswer = !this.showAnswer
 			}
-		}
 		}
 	}
 </script>
@@ -98,6 +105,7 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+		overflow: hidden;
 
 		.header {
 			display: flex;
@@ -121,20 +129,31 @@
 				font-size: 24rpx;
 			}
 		}
-		.countBox{
+
+		.countBox {
 			display: flex;
 			flex-direction: row;
 			width: 100%;
-			padding:8rpx;
-			margin-top:8rpx;
-			flex-wrap:wrap;
-			.jobItem{
-				border-right:1rpx solid gray;
+			padding: 8rpx;
+			margin-top: 8rpx;
+			flex-wrap: wrap;
+
+			.jobItem {
+				border-right: 1rpx solid gray;
 				border-bottom: 1rpx solid gray;
-				border-top:1rpx solid gray;
-				border-left:1rpx solid gray;
+				border-top: 1rpx solid gray;
+				border-left: 1rpx solid gray;
 				text-align: center;
+				height: 64rpx;
+				line-height: 64rpx;
+
+				.answer {
+					display: inline-block;
+				}
 			}
+
+			max-height: 75vh;
+			overflow-y: auto;
 		}
 	}
 </style>
