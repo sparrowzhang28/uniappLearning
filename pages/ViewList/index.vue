@@ -129,9 +129,9 @@
 			this.getTable()
 			console.log('mounted')
 		},
-		onLaunch() {
+		onShow(){
 			this.getTable()
-			console.log('onLaunch')
+			console.log('onShow')
 		},
 		methods: {
 			getTable() {
