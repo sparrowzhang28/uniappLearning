@@ -141,7 +141,8 @@
 						'job-lastupdate-time': '2022-02-02',
 						'job-object': 'zjl',
 						'job-reviewer': 'zyj',
-						scope: 99
+						scope: 99,
+						list:[]
 					},
 					{
 						id: '1002',
@@ -152,7 +153,8 @@
 						'job-lastupdate-time': '2022-02-02',
 						'job-object': 'zjl',
 						'job-reviewer': 'zyj',
-						scope: 99
+						scope: 99,
+						list:[]
 					}
 				]
 				this.tableData = originData.filter(i => i.status === this.statusParams || !this.statusParams)
@@ -161,39 +163,40 @@
 				console.log('item', item)
 				this.editDialogItem = item
 				// get modalTableList by item-params
-				this.modelTableData = [{
-					order: 1,
-					content: '1+1',
-					answer: '2'
-				}, {
-					order: 2,
-					content: '2+2',
-					answer: '4'
-				}, {
-					order: 3,
-					content: '3+3',
-					answer: '6'
-				}, {
-					order: 4,
-					content: '4+4',
-					answer: '8'
-				}, {
-					order: 5,
-					content: '5+5',
-					answer: '10'
-				}, {
-					order: 6,
-					content: '6+6',
-					answer: '12'
-				}, {
-					order: 7,
-					content: '7+7',
-					answer: '14'
-				}, {
-					order: 8,
-					content: '8+8',
-					answer: '16'
-				}]
+				this.modelTableData=item.list
+				// this.modelTableData = [{
+				// 	order: 1,
+				// 	content: '1+1',
+				// 	answer: '2'
+				// }, {
+				// 	order: 2,
+				// 	content: '2+2',
+				// 	answer: '4'
+				// }, {
+				// 	order: 3,
+				// 	content: '3+3',
+				// 	answer: '6'
+				// }, {
+				// 	order: 4,
+				// 	content: '4+4',
+				// 	answer: '8'
+				// }, {
+				// 	order: 5,
+				// 	content: '5+5',
+				// 	answer: '10'
+				// }, {
+				// 	order: 6,
+				// 	content: '6+6',
+				// 	answer: '12'
+				// }, {
+				// 	order: 7,
+				// 	content: '7+7',
+				// 	answer: '14'
+				// }, {
+				// 	order: 8,
+				// 	content: '8+8',
+				// 	answer: '16'
+				// }]
 				this.$refs.popup.open()
 			},
 			close() {
@@ -215,11 +218,6 @@
 			},
 			exportModalTable() {
 				console.log('exportModalTable')
-				// let fm=wx.getFileSystemManager()
-				// fm.writeFile({
-				// 	filePath:'text.xls',
-				// 	data:this.modelTableData
-				// })
 			},
 			applyOperator(op) {
 				if (op.includes('+')) {
@@ -240,7 +238,6 @@
 				}
 			},
 			count() {
-				console.log('123', this.modelTableData)
 				let count = 0;
 				this.modelTableData.forEach(i => {
 					const {

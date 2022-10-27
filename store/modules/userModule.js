@@ -4,8 +4,7 @@ export default {
 	},
 	getters:{},
 	mutations:{
-		saveUser(state,payload){
-			console.log('24-store',payload)
+		saveUser(state,payload){s
 			state.userName=payload
 		}
 	},

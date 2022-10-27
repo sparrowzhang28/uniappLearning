@@ -14,7 +14,7 @@
 		</uni-row>
 		<uni-row class="countBox">
 			<uni-col :span="6" v-for="(item,index) of jobsList" :key="index" class="jobItem">
-				<view  @click="clickJobItem" class="answer">{{item.count}}</view>
+				<view  @click="clickJobItem" class="answer">{{item.content}}</view>
 				<view v-if="showAnswer" class="answer">={{item.answer}}</view>
 			</uni-col>
 		</uni-row>
@@ -85,12 +85,26 @@
 						str = num1 + this.calcOper + num2
 						answer = this.mappingCalcOper(this.calcOper, num1, num2)
 						calcNums.push({
-							count: str,
+							order:i,
+							content: str,
 							answer: answer
 						})
 					}
 					this.jobsList = calcNums
 				}
+				
+				// {
+				// 		id: '1001',
+				// 		jobName: '第一次作业',
+				// 		'batch-total': 100,
+				// 		status: 1001,
+				// 		'job-create-time': '2022-01-01',
+				// 		'job-lastupdate-time': '2022-02-02',
+				// 		'job-object': 'zjl',
+				// 		'job-reviewer': 'zyj',
+				// 		scope: 99,
+				// 		list:[]
+				// 	}
 			},
 			clickJobItem() {
 				this.showAnswer = !this.showAnswer
