@@ -235,7 +235,7 @@
 
 <style scoped lang="less">
 	.uni-container{
-		// overflow: hidden;
+		overflow: hidden;
 	}
 	.btnBox {
 		.uni-button {
