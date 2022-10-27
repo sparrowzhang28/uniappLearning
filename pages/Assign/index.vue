@@ -96,7 +96,7 @@
 				}
 				const item = {
 					id: jobStore.state.jobList.length + 1,
-					jobName: '第一次作业',
+					jobName: `第${jobStore.state.jobList.length + 1}次作业`,
 					'batch-total': this.jobsNum,
 					status: 1001,
 					'job-create-time': moment(new Date()).format("YYYY-MM-DD"),

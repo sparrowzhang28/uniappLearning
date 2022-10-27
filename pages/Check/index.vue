@@ -1,9 +1,15 @@
 <template>
 	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view class="text-area">
-			<text class="title">check</text>
-		</view>
+		<uni-row class="headerBox">
+			<uni-col :span="10">
+				<view style="display: inline-block;margin-right: 8rpx;">编号:</view>
+				<uni-easyinput v-model="noParams" style="display: inline-block;width: 200rpx;"></uni-easyinput>
+			</uni-col>
+			<uni-col :span="6">
+				<button class="searchBtn" @click="searchTable">查询</button>
+			</uni-col>
+		</uni-row>
+
 	</view>
 </template>
 
@@ -11,42 +17,26 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello'
+				noParams: ''
 			}
 		},
-		onLoad() {
-
-		},
 		methods: {
-
+			searchTable() {
+				console.log('searchTable')
+			}
 		}
 	}
 </script>
 
-<style>
-	.content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
+<style scoped lang="less">
+	.headerBox {
+		margin: 8rpx !important;
 	}
 
-	.logo {
-		height: 200rpx;
-		width: 200rpx;
-		margin-top: 200rpx;
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 50rpx;
-	}
-
-	.text-area {
-		display: flex;
-		justify-content: center;
-	}
-
-	.title {
-		font-size: 36rpx;
-		color: #8f8f94;
+	.searchBtn {
+		line-height: 35px;
+		font-size: 28rpx;
+		padding: 0 24rpx;
+		margin-left: 12rpx;
 	}
 </style>
