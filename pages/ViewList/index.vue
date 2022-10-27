@@ -17,7 +17,7 @@
 					<uni-th v-for="(item,index) of thCols" :key="index" align="center">{{item.name}}</uni-th>
 				</uni-tr>
 				<uni-tr v-for="(item, index) of tableData" :key="index">
-					<uni-td v-for="(titem, tindex) in item" :key="tindex" align="center">
+					<uni-td v-for="(titem, tindex) in item" :key="tindex" align="center" v-if="tindex!=='list'">
 						{{ tindex==='status'?statusList.find(i=>i.value===titem).text:titem }}
 					</uni-td>
 					<uni-td align="center">
@@ -64,8 +64,7 @@
 </template>
 
 <script>
-	import json2xlsx from 'json2xlsx-export';
-	import userStore from '../../store/modules/userModule.js'
+	import jobStore from '../../store/modules/jobModule.js'
 	export default {
 		data() {
 			return {
@@ -127,43 +126,22 @@
 		mounted() {
 			const userName = uni.getStorageSync('user')
 			const userName1 = getApp().globalData.user
-			const userName2 = userStore.state.userName
 			this.getTable()
+			console.log('mounted')
+		},
+		onLaunch() {
+			this.getTable()
+			console.log('onLaunch')
 		},
 		methods: {
 			getTable() {
-				const originData = [{
-						id: '1001',
-						jobName: '第一次作业',
-						'batch-total': 100,
-						status: 1001,
-						'job-create-time': '2022-01-01',
-						'job-lastupdate-time': '2022-02-02',
-						'job-object': 'zjl',
-						'job-reviewer': 'zyj',
-						scope: 99,
-						list:[]
-					},
-					{
-						id: '1002',
-						jobName: '第二次作业',
-						'batch-total': 101,
-						status: 1002,
-						'job-create-time': '2022-01-01',
-						'job-lastupdate-time': '2022-02-02',
-						'job-object': 'zjl',
-						'job-reviewer': 'zyj',
-						scope: 99,
-						list:[]
-					}
-				]
-				this.tableData = originData.filter(i => i.status === this.statusParams || !this.statusParams)
+				this.tableData = jobStore.state.jobList.filter(i => i.status === this.statusParams || !this.statusParams)
 			},
 			editItem(item) {
 				console.log('item', item)
 				this.editDialogItem = item
 				// get modalTableList by item-params
-				this.modelTableData=item.list
+				this.modelTableData = item.list
 				// this.modelTableData = [{
 				// 	order: 1,
 				// 	content: '1+1',
@@ -256,6 +234,9 @@
 </script>
 
 <style scoped lang="less">
+	.uni-container{
+		// overflow: hidden;
+	}
 	.btnBox {
 		.uni-button {
 			margin-right: 24rpx;

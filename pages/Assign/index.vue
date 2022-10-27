@@ -14,7 +14,7 @@
 		</uni-row>
 		<uni-row class="countBox">
 			<uni-col :span="6" v-for="(item,index) of jobsList" :key="index" class="jobItem">
-				<view  @click="clickJobItem" class="answer">{{item.content}}</view>
+				<view @click="clickJobItem" class="answer">{{item.content}}</view>
 				<view v-if="showAnswer" class="answer">={{item.answer}}</view>
 			</uni-col>
 		</uni-row>
@@ -25,6 +25,8 @@
 </template>
 
 <script>
+	import jobStore from "../../store/modules/jobModule.js"
+	import moment from "moment"
 	export default {
 		data() {
 			return {
@@ -52,7 +54,7 @@
 			mappingCalcOper(oper, a, b) {
 				switch (oper) {
 					case '+':
-				 	return a + b;
+						return a + b;
 						break;
 					case '-':
 						return a - b;
@@ -85,26 +87,26 @@
 						str = num1 + this.calcOper + num2
 						answer = this.mappingCalcOper(this.calcOper, num1, num2)
 						calcNums.push({
-							order:i,
+							order: i,
 							content: str,
 							answer: answer
 						})
 					}
 					this.jobsList = calcNums
 				}
-				
-				// {
-				// 		id: '1001',
-				// 		jobName: '第一次作业',
-				// 		'batch-total': 100,
-				// 		status: 1001,
-				// 		'job-create-time': '2022-01-01',
-				// 		'job-lastupdate-time': '2022-02-02',
-				// 		'job-object': 'zjl',
-				// 		'job-reviewer': 'zyj',
-				// 		scope: 99,
-				// 		list:[]
-				// 	}
+				const item = {
+					id: jobStore.state.jobList.length + 1,
+					jobName: '第一次作业',
+					'batch-total': this.jobsNum,
+					status: 1001,
+					'job-create-time': moment(new Date()).format("YYYY-MM-DD"),
+					'job-lastupdate-time': moment(new Date()).format("YYYY-MM-DD"),
+					'job-object': 'zjl',
+					'job-reviewer': 'zyj',
+					scope: 0,
+					list: this.jobsList
+				}
+				this.$store.commit('saveJobs', item)
 			},
 			clickJobItem() {
 				this.showAnswer = !this.showAnswer

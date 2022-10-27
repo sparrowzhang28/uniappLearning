@@ -4,7 +4,7 @@ export default {
 	},
 	getters:{},
 	mutations:{
-		saveUser(state,payload){s
+		saveUser(state,payload){
 			state.userName=payload
 		}
 	},
