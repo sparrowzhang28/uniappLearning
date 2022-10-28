@@ -118,6 +118,9 @@
 					key: 'content',
 					name: '题目'
 				}, {
+					key: 'response',
+					name: '作答'
+				}, {
 					key: 'answer',
 					name: '答案'
 				}]
@@ -129,7 +132,7 @@
 			this.getTable()
 			console.log('mounted')
 		},
-		onShow(){
+		onShow() {
 			this.getTable()
 			console.log('onShow')
 		},
@@ -140,41 +143,7 @@
 			editItem(item) {
 				console.log('item', item)
 				this.editDialogItem = item
-				// get modalTableList by item-params
 				this.modelTableData = item.list
-				// this.modelTableData = [{
-				// 	order: 1,
-				// 	content: '1+1',
-				// 	answer: '2'
-				// }, {
-				// 	order: 2,
-				// 	content: '2+2',
-				// 	answer: '4'
-				// }, {
-				// 	order: 3,
-				// 	content: '3+3',
-				// 	answer: '6'
-				// }, {
-				// 	order: 4,
-				// 	content: '4+4',
-				// 	answer: '8'
-				// }, {
-				// 	order: 5,
-				// 	content: '5+5',
-				// 	answer: '10'
-				// }, {
-				// 	order: 6,
-				// 	content: '6+6',
-				// 	answer: '12'
-				// }, {
-				// 	order: 7,
-				// 	content: '7+7',
-				// 	answer: '14'
-				// }, {
-				// 	order: 8,
-				// 	content: '8+8',
-				// 	answer: '16'
-				// }]
 				this.$refs.popup.open()
 			},
 			close() {
@@ -220,10 +189,11 @@
 				this.modelTableData.forEach(i => {
 					const {
 						answer,
-						content
+						content,
+						response
 					} = i
 					const tmp = content.replaceAll('"')
-					if (Number(answer) === this.applyOperator(tmp)) {
+					if (response && Number(response) === this.applyOperator(tmp)) {
 						count++
 					}
 				})
@@ -234,9 +204,10 @@
 </script>
 
 <style scoped lang="less">
-	.uni-container{
+	.uni-container {
 		overflow: hidden;
 	}
+
 	.btnBox {
 		.uni-button {
 			margin-right: 24rpx;

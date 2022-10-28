@@ -89,6 +89,7 @@
 						calcNums.push({
 							order: i,
 							content: str,
+							response: '',
 							answer: answer
 						})
 					}

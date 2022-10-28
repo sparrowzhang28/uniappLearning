@@ -1,8 +1,8 @@
 <template>
 	<view class="content">
 		<uni-row class="headerBox">
-			<uni-col :span="10">
-				<view style="display: inline-block;margin-right: 8rpx;">编号:</view>
+			<uni-col :span="16">
+				<view style="display: inline-block;margin-right: 8rpx;">作业编号:</view>
 				<uni-easyinput v-model="noParams" style="display: inline-block;width: 200rpx;"></uni-easyinput>
 			</uni-col>
 			<uni-col :span="6">
@@ -31,6 +31,7 @@
 <style scoped lang="less">
 	.headerBox {
 		margin: 8rpx !important;
+		font-size: 28rpx;
 	}
 
 	.searchBtn {
