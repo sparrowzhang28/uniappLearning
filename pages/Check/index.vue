@@ -30,27 +30,28 @@
 			}
 		},
 		methods: {
-			  // 假设我们已经判断完类型
-			deepClone (val) {
-			  // 如果是基本数据类型，直接返回值
-			  if (!isObject) {
-			    return val
-			  }
-			  // 如果是数组，遍历赋值
-			  if (isArray(val)) {
-			    const cloneArray = []
-			    for (let i = 0; i < val.length; i++) {
-			      cloneArray[i] = deepClone(val[i])
-			    }
-			    return cloneArray
-			  }
-			  // 如果是对象
-			  const keys = Object.keys(val)
-			  const cloneObj = {}
-			  for (let i = 0; i < keys.length; i++) {
-			    cloneObj[keys[i]] = deepClone(val[keys[i]])
-			  }
-			  return cloneObj
+			// 假设我们已经判断完类型
+			deepClone(val) {
+				// 如果是基本数据类型，直接返回值
+				const isObject = typeof val === 'object'
+				if (!isObject) {
+					return val
+				}
+				// 如果是数组，遍历赋值
+				if (Array.isArray(val)) {
+					const cloneArray = []
+					for (let i = 0; i < val.length; i++) {
+						cloneArray[i] = this.deepClone(val[i])
+					}
+					return cloneArray
+				}
+				// 如果是对象
+				const keys = Object.keys(val)
+				const cloneObj = {}
+				for (let i = 0; i < keys.length; i++) {
+					cloneObj[keys[i]] = this.deepClone(val[keys[i]])
+				}
+				return cloneObj
 			},
 			searchTable() {
 				console.log('searchTable', jobStore.state.jobList)
@@ -60,6 +61,15 @@
 			},
 			submitTable() {
 				console.log('submitTable', this.currentJob, jobStore.state.jobList)
+				const item = jobStore.state.jobList.find(i => String(i.id) === String(this.noParams))
+				console.log('searchTable', item)
+				const tmpList = this.deepClone(jobStore.state.jobList)
+				tmpList.forEach(i => {
+					if (String(i.id) === String(this.noParams)) {
+						i.list = this.currentJob
+					}
+				})
+				this.$store.commit('updateJobList', tmpList)
 			}
 		}
 	}

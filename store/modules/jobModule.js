@@ -1,12 +1,15 @@
 export default {
-	state:{
-		jobList:[]
+	state: {
+		jobList: []
 	},
-	getters:{},
-	mutations:{
-		saveJobs(state,payload){
-			state.jobList=[...state.jobList,payload]
+	getters: {},
+	mutations: {
+		saveJobs(state, payload) {
+			state.jobList = [...state.jobList, payload]
+		},
+		updateJobList(state, payload) {
+			state.jobList = payload
 		}
 	},
-	actions:{}
+	actions: {}
 }
