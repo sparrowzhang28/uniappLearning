@@ -25,7 +25,7 @@
             "path" : "pages/Check/index",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "作业检查",
+                "navigationBarTitleText": "作业填写",
                 "enablePullDownRefresh": false
             }
         }
