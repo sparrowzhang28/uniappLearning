@@ -12,7 +12,7 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "查看作业",
-                "enablePullDownRefresh": false
+                "enablePullDownRefresh": true
             }
         },{
             "path" : "pages/Assign/index",
@@ -50,7 +50,7 @@
 				"text": "布置作业"
 			},{
 				"pagePath": "pages/Check/index",
-				"text": "作业检查"
+				"text": "作业填写"
 			}
 		]
 	}

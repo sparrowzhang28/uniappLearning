@@ -12,7 +12,7 @@
 				</uni-row>
 				<uni-row class="row">
 				<uni-col :span="6" :offset="2">密码：</uni-col>
-				<uni-col :span="14"><uni-easyinput class="password" trim="all" v-model="passCode" placeholder="请输入内容"></uni-easyinput></uni-col>
+				<uni-col :span="14"><uni-easyinput class="password" trim="all" v-model="passCode" placeholder="请输入内容" type="password"></uni-easyinput></uni-col>
 				</uni-row>
 			</view>
 			<view class="btnBox">
@@ -34,8 +34,8 @@
 	export default {
 		data() {
 			return {
-				username:"",
-				passCode:"",
+				username:"admin",
+				passCode:"123456",
 				submitEnable:false,
 				editEnable:false,
 				addEnable:false,
