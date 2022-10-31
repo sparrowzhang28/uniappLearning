@@ -105,14 +105,16 @@
 			text-align: center;
 			height: 64rpx;
 			line-height: 64rpx;
+			display: flex;
+			padding: 0 4rpx;
 
 			.answer {
 				display: inline-block;
 			}
 
 			.inputResponse {
-				width: 60rpx;
-				display: inline-block;
+				display: flex;
+				flex: 1;
 				vertical-align: top;
 
 				/deep/.uni-easyinput__content {
