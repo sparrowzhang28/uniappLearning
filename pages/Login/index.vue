@@ -84,7 +84,7 @@
 				uQRCode.make({
 					canvasId: 'qrcode',
 					componentInstance: this,
-					text: '我住在22-1-501',
+					text: 'http://static-c53de1c8-6851-4d09-9e57-1e278711f265.bspapp.com/#/pages/ViewList/index',
 					size: 150,
 					margin: 0,
 					backgroundColor: '#ffffff',
