@@ -26,7 +26,7 @@
 				<view>忘记密码</view>
 			</view>
 			<view class="btnBox submit">
-				<uni-button @click="login" :disable="!username||!passCode">登录</uni-button>
+				<uni-button  @tap="login" @click="login" :disable="!username||!passCode">登录</uni-button>
 				<uni-popup ref="popup" type="center">{{tipMsg}}</uni-popup>
 			</view>
 			<view class="qr-box">
