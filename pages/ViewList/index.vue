@@ -134,7 +134,7 @@
 		},
 		onShow() {
 			this.getTable()
-			console.log('onShow')
+			console.log('onShow',jobStore.state.jobList)
 		},
 		methods: {
 			getTable() {

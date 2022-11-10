@@ -66,6 +66,13 @@
 				const tmpList = this.deepClone(jobStore.state.jobList)
 				tmpList.forEach(i => {
 					if (String(i.id) === String(this.noParams)) {
+						let tmpScope = 0
+						this.currentJob.forEach(j => {
+							if (String(j.answer) === String(j.response)) {
+								tmpScope++
+							}
+						})
+						i.scope = Math.floor(tmpScope / this.currentJob.length * 100)
 						i.list = this.currentJob
 					}
 				})
