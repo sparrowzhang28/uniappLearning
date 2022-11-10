@@ -22,8 +22,8 @@
 					</uni-td>
 					<uni-td align="center">
 						<view class="uni-group btnBox">
-							<button class="uni-button" size="mini" type="primary" @click="editItem(item)">修改</button>
-							<button class="uni-button" size="mini" type="warn" @click="delItem(item)">删除</button>
+							<button class="uni-button" size="mini" type="primary" @tap="editItem(item)">修改</button>
+							<button class="uni-button" size="mini" type="warn" @tap="delItem(item)">删除</button>
 						</view>
 					</uni-td>
 				</uni-tr>
