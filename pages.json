@@ -1,35 +1,37 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-            "path" : "pages/Login/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "登录",
-                "enablePullDownRefresh": false
-            }
-        },{
-            "path" : "pages/ViewList/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "查看作业",
-                "enablePullDownRefresh": false
-            }
-        },{
-            "path" : "pages/Assign/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "布置作业",
-                "enablePullDownRefresh": false
-            }
-        },{
-            "path" : "pages/Check/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "作业填写",
-                "enablePullDownRefresh": false
-            }
-        }
-    ],
+			"path": "pages/Login/index",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/ViewList/index",
+			"style": {
+				"navigationBarTitleText": "查看作业",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/Assign/index",
+			"style": {
+				"navigationBarTitleText": "布置作业",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/Check/index",
+			"style": {
+				"navigationBarTitleText": "作业填写",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"pagePath": "pages/ExcelFunc/index",
+			"style": {
+				"navigationBarTitleText": "Excel operation",
+				"enablePullDownRefresh": false
+			}
+		}
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
@@ -43,16 +45,18 @@
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
 		"list": [{
-				"pagePath": "pages/ViewList/index",
-				"text": "查看作业"
-			},{
-				"pagePath": "pages/Assign/index",
-				"text": "布置作业"
-			},{
-				"pagePath": "pages/Check/index",
-				"text": "作业填写"
-			}
-		]
+			"pagePath": "pages/ViewList/index",
+			"text": "查看作业"
+		}, {
+			"pagePath": "pages/Assign/index",
+			"text": "布置作业"
+		}, {
+			"pagePath": "pages/Check/index",
+			"text": "作业填写"
+		}, {
+			"pagePath": "pages/ExcelFunc/index",
+			"text": "excel-function"
+		}]
 	},
 	"lazyCodeLoading": "requiredComponents"
 }

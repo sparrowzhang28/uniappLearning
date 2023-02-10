@@ -1,8 +1,10 @@
 <template>
 	<view class="content">
 		<uni-row class="header">
-			<uni-col :span="7">计算条件:&nbsp;<uni-data-select :localdata="calcOperators" v-model="calcOper"
-					style="display: inline-block;width: 100rpx;" :clear="false"></uni-data-select>
+			<uni-col :span="7">计算条件:&nbsp;
+				<uni-data-select :localdata="calcOperators" v-model="calcOper"
+					style="display: inline-block;width: 100rpx;" :clear="false">
+				</uni-data-select>
 			</uni-col>
 			<uni-col :span="7">作业数量:&nbsp;<uni-easyinput class="rangenum" v-model="jobsNum" :clearable="false">
 				</uni-easyinput>
@@ -45,7 +47,16 @@
 				}, {
 					value: '/',
 					text: '除'
-				}],
+				},
+				{
+					value: '#',
+					text: '混合加减'
+				},
+				{
+					value: '@',
+					text: '3数混合'
+				}
+				],
 				calcOper: '+',
 				showAnswer: false
 			}
@@ -74,25 +85,73 @@
 					return
 				} else {
 					const calcNums = []
+					const calcStr=[]
 					for (let i = 0; i < this.jobsNum; i++) {
 						let str = ''
 						let answer = 0
-						const num1 = Math.ceil(Math.random() * this.numRange)
-						const num2 = Math.ceil(Math.random() * this.numRange)
-						if (this.calcOper === '-') {
+						let num1 = Math.ceil(Math.random() * this.numRange)
+						let num2 = Math.ceil(Math.random() * this.numRange)
+						let num3 = Math.ceil(Math.random() * this.numRange)
+						let calcOperator=this.calcOper
+						if(calcOperator === '#'){
+							calcOperator=Math.random()>0.5?'+':'-'
+						}
+						if (calcOperator === '-') {
 							if (num1 < num2) {
 								[num1, num2] = [num2, num1]
 							}
 						}
-						str = num1 + this.calcOper + num2
-						answer = this.mappingCalcOper(this.calcOper, num1, num2)
-						calcNums.push({
-							order: i,
-							content: str,
-							response: '',
-							answer: answer
-						})
+						if(calcOperator === '@'){
+							calcOperator=Math.random()>0.5?'+':'-'
+							if (calcOperator === '-') {
+								if (num1 < num2) {
+									[num1, num2] = [num2, num1]
+								}
+							}
+							
+							answer = this.mappingCalcOper(calcOperator, num1, num2)
+							if(answer<0){
+								calcOperator='+'	
+							}
+							str = num1 + calcOperator + num2
+							answer = this.mappingCalcOper(calcOperator, num1, num2)
+							
+							calcOperator=Math.random()>0.5?'+':'-'
+							if (calcOperator === '-') {
+								if (answer < num3) {
+									[answer, num3] = [num3, answer]
+								}
+							}
+							
+							answer = this.mappingCalcOper(calcOperator,answer,num3)
+							if(answer<0){
+								calcOperator='+'	
+							}
+							str += calcOperator + num3 + ''
+							
+							answer = this.mappingCalcOper(calcOperator, answer, num3)
+							
+							calcStr.push(`${str}=\r\n`)
+							calcNums.push({
+								order: i,
+								content: str,
+								response: '',
+								answer: answer
+							})
+							
+						}else{
+							str = num1 + calcOperator + num2
+							answer = this.mappingCalcOper(calcOperator, num1, num2)
+							calcStr.push(`${str}=\r\n`)
+							calcNums.push({
+								order: i,
+								content: str,
+								response: '',
+								answer: answer
+							})
+						}
 					}
+					console.log('calcStr',calcStr.join(''))
 					this.jobsList = calcNums
 				}
 				const item = {
@@ -122,7 +181,7 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		overflow: hidden;
+		// overflow: hidden;
 
 		.header {
 			display: flex;
